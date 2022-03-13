@@ -39,7 +39,8 @@ CHROME_GUESSES_MACOS = (
 # https://stackoverflow.com/a/40674915/409879
 CHROME_GUESSES_WINDOWS = (
     # Windows 10
-    os.path.expandvars(r"%ProgramFiles(x86)%\Google\Chrome\Application\chrome.exe"),
+    os.path.expandvars(
+        r"%ProgramFiles(x86)%\Google\Chrome\Application\chrome.exe"),
     os.path.expandvars(r"%ProgramFiles%\Google\Chrome\Application\chrome.exe"),
     os.path.expandvars(r"%LocalAppData%\Google\Chrome\Application\chrome.exe"),
     # Windows 7
@@ -122,6 +123,7 @@ def write_pdf(html: str, prefix: str = "resume", chrome: str = "") -> None:
     chrome = chrome or guess_chrome_path()
     html64 = base64.b64encode(html.encode("utf-8"))
     options = [
+        "--no-sandbox",
         "--headless",
         "--print-to-pdf-no-header",
         "--enable-logging=stderr",
